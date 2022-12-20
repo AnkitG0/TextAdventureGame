@@ -20,20 +20,21 @@ public class Game {
     ChoiceHandler choiceHandler = new ChoiceHandler();
 
     public Game() {
+        // Creating game window
         window = new JFrame();
         window.setSize(800, 600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // this is to stop the program from running once x is clicked
         window.getContentPane().setBackground(Color.black); // set the color of the window
         window.setLayout(null); // want to use custom layout
         con = window.getContentPane(); // used to place various components like buttons, text box, etc
-
+        // Creating title
         titleNamePanel = new JPanel(); // this creates a title in the game panel
         titleNamePanel.setBounds(100, 100, 600, 150); // creating a space for title name
         titleNamePanel.setBackground(Color.black);
         titleNameLabel =new JLabel("ADVENTURE!"); // this adds text to the title panel
         titleNameLabel.setForeground(Color.WHITE); // selecting the font color
         titleNameLabel.setFont(titleFont);
-
+        // Creating start button
         startButtonPanel = new JPanel(); // creating start button panel
         startButtonPanel.setBounds(300, 400, 250, 50);
         startButtonPanel.setBackground(Color.black);
