@@ -8,11 +8,13 @@ public class Game {
     UI ui = new UI(); // creates ui object
     ChoiceHandler choiceHandler = new ChoiceHandler(); // handles all the choices made in the game;
     VisibilityManager vm = new VisibilityManager(ui); // sends the ui to visibility manager;
+    Story story = new Story(this, ui, vm); // send the game, ui, vm to story
     //TSHandler tsHandler;
     public Game() {
         // Creating the game window/title screen/start button by calling createUI method
         ui.createUI(choiceHandler); //
         ui.createGameScreen(choiceHandler); // this creates the game panels
+        story.defaultSetup(); // this creates the player panel
         vm.showTitleScreen(); // shows only the title screen. Not the game panel
 
 
