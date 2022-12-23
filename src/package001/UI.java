@@ -5,15 +5,11 @@ import java.awt.*;
 
 public class UI {
 
-//    public UI() {
-//
-//    }
     JFrame window;
     JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel;
     JButton startButton, choice1, choice2, choice3, choice4;
     JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
     JTextArea mainTextArea;
-    int playerHP, monsterHP, silverRing = 0;
     Font titleFont = new Font("Papyrus", Font.PLAIN, 65);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 20);
 
