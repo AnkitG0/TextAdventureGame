@@ -1,9 +1,6 @@
 package package001;
 
-import package002.Monster_Goblin;
-import package002.SuperMonster;
-import package002.Weapon_Knife;
-import package002.Weapon_LongSword;
+import package002.*;
 
 public class Story {
 
@@ -51,6 +48,7 @@ public class Story {
             case "win" -> win();
             case "fight" -> fight();
             case "playerAttack" -> playerAttack();
+            case "toTitle" -> toTitle();
         }
     }
     public void townGate() {
@@ -70,15 +68,21 @@ public class Story {
     }
 
     public void talkGuard() {
-        ui.mainTextArea.setText("""
+        if (silverRing == 0) {
+            ui.mainTextArea.setText("""
                 Guard: Hello stranger. I have never seen your face.\s
                 I'm sorry but we cannot let a stranger enter our town.""");
-        ui.choice1.setText("Go back to town gate");
-        ui.choice2.setText(">");
-        ui.choice3.setText(">");
-        ui.choice4.setText(">");
-        // Setting the values for the position variables
-        game.nextPosition1 = "townGate";
+            ui.choice1.setText("Go back to town gate");
+            ui.choice2.setText(">");
+            ui.choice3.setText(">");
+            ui.choice4.setText(">");
+            // Setting the values for the position variables
+            game.nextPosition1 = "townGate";
+        }
+        else {
+            ending();
+        }
+
 
     }
     public void attackGuard() {
@@ -146,7 +150,11 @@ public class Story {
         game.nextPosition4 = "";
     }
     public void goWest() {
-        monster = new Monster_Goblin(); // adds goblin in the monster object
+        int decideMonster = new java.util.Random().nextInt(100) + 1;
+        if (decideMonster < 90) {
+            monster = new Monster_Goblin(); // adds goblin in the monster object
+        }
+        else monster = new Monster_Gandalf(); // adds Gandalf in the monster object
 
         ui.mainTextArea.setText("You encounter a " + monster.name + "!" + "\nWhat do you do?" );
 
@@ -161,7 +169,7 @@ public class Story {
         game.nextPosition4 = "";
     }
     public void fight() {
-        ui.mainTextArea.setText(monster.name + ": " + monster.hp + "\n\nWhat do you do?");
+        ui.mainTextArea.setText(monster.name + " HP: " + monster.hp + "\n\nWhat do you do?");
         ui.choice1.setText("Attack");
         ui.choice2.setText("Run");
         ui.choice3.setText("");
@@ -197,7 +205,7 @@ public class Story {
     }
     public void monsterAttack() {
         int monsterDamage = new java.util.Random().nextInt(monster.attack);
-        ui.mainTextArea.setText(monster.name + " attacked you and gave " + monsterDamage + " damage!");
+        ui.mainTextArea.setText(monster.attackMessage + "\n" + "You received " + monsterDamage + " damage!");
         player.setHp(player.getHp() - monsterDamage);
         ui.hpLabelNumber.setText("" + player.getHp());
 
@@ -240,14 +248,38 @@ public class Story {
     }
     public void lose() {
         ui.mainTextArea.setText("You are dead\n\n<GAME OVER>");
-        ui.choice1.setText("");
+        ui.choice1.setText("To the title screen");
         ui.choice2.setText("");
         ui.choice3.setText("");
         ui.choice4.setText("");
 
+        ui.choice2.setVisible(false);
+        ui.choice3.setVisible(false);
+        ui.choice4.setVisible(false);
+
+        game.nextPosition1 = "toTitle";
+        game.nextPosition2 = "";
+        game.nextPosition3 = "";
+        game.nextPosition4 = "";
+    }
+    public void ending() {
+        ui.mainTextArea.setText("""
+            Guard: Oh you killed that goblin?\s
+            Thank you so much. You are a true hero.\s
+            Welcome to our town!
+            
+            <THE END>""");
+        ui.choice1.setText("");
+        ui.choice2.setText("");
+        ui.choice3.setText("");
+        ui.choice4.setText("");
         ui.choice1.setVisible(false);
         ui.choice2.setVisible(false);
         ui.choice3.setVisible(false);
         ui.choice4.setVisible(false);
+    }
+    public void toTitle() {
+        defaultSetup();
+        vm.showTitleScreen();
     }
 }

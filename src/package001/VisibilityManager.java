@@ -17,7 +17,7 @@ public class VisibilityManager {
     }
     public void titleToTown() {
         // This is to make the title screen invisible and game element visible
-        ui.titleNamePanel.setVisible(false);
+        ui.titleNamePanel .setVisible(false);
         ui.startButtonPanel.setVisible(false);
         // Showing the game screen
         ui.mainTextPanel.setVisible(true);
